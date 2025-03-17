@@ -2,7 +2,7 @@
 title: 记一次失败的linux
 date: 2025-03-16 21:57:13
 tags: 
-  -linux
+   linux
 ---
 
 # 事情起因
