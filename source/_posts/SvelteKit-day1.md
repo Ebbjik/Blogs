@@ -4,7 +4,7 @@ date: 2025-03-22 21:51:39
 tags:
   sveltekit
   前端
-type:
+categories:
   学习
 ---
 
