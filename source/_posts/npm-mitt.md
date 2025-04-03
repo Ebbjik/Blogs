@@ -2,8 +2,7 @@
 title: npm_mitt
 date: 2025-03-28 15:54:11
 tags:
-  npm
-  vue3
+  [npm, vue3]
 ---
 
 这篇文章用于记录一个很有用的组件间通信的库==mitt
