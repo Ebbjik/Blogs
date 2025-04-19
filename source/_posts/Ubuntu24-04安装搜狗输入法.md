@@ -2,6 +2,9 @@
 title: Ubuntu24.04安装搜狗输入法
 date: 2025-04-19 11:39:17
 tags:
+  [linux, Ubuntu]
+categories:
+  教程
 ---
 
 此篇文章介绍如何在ubuntu24.04中安装搜狗输入法
