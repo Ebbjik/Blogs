@@ -2,7 +2,7 @@
 title: Ubuntu24.04用终端启动cursor
 date: 2025-04-26 14:01:14
 tags:
-  [linux, Ubuntu， cursor]
+  [linux, Ubuntu, cursor]
 categories:
   教程
 ---
