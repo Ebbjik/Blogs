@@ -74,3 +74,7 @@ sudo update-alternatives --config x-terminal-emulator
 选择kitty即可（键入1）
 
 至此，成功安装了kitty并将其设置为了默认终端，用终端快捷键`ctrl+alt+t`检查，呼出的是kitty终端，操作结束
+
+# 后记-4.26
+
+kitty不支持fcitx4，有相关需要的注意
