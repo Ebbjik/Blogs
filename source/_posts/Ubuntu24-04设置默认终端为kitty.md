@@ -78,3 +78,8 @@ sudo update-alternatives --config x-terminal-emulator
 # 后记-4.26
 
 kitty不支持fcitx4，有相关需要的注意
+
+# 后记-4.26
+
+wezterm支持fcitx4，同时也支持图片预览功能
+依照上方的教程把默认的终端更改为wezterm
