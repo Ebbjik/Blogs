@@ -79,6 +79,9 @@ threshold:
 interval:
   swipe: 0.5  # 滑动手势的时间间隔设置为 0.5 秒
   pinch: 0.5  # 捏合手势的时间间隔设置为 0.5 秒
-
 ```
+
 随后只需更改对应的快捷键即可
+
+参考链接
+[linux mint安装触控板手势fusuma](https://www.cnblogs.com/robots2/p/18647326)
