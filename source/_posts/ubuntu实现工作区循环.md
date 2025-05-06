@@ -15,7 +15,6 @@ categories:
 
 在终端中运行以下命令
 ```
-
 sudo apt update
 sudo apt install gnome-shell-extension-manager
 ```
