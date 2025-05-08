@@ -138,3 +138,23 @@ if [[ "$TERM_PROGRAM" != "vscode" && -z "$VSCODE_INJECTION" && -z "$NVIM" ]]; th
 fi
 ```
 这样就可以保证fastfetch只有在打开终端软件时才会运行
+
+# 可能出现的问题
+
+## 解决可能会变成黑白的问题
+
+今天突然发现Ubuntu中配置的fastfetch在打开终端时，默认运行的那次fastfetch是黑白的
+
+解决方法：
+把`~/.zshrc`中的配置文件改成下面这样
+```
+# fastfetch
+# Run fastfetch only when NOT in VSCode terminal or nvim
+if [[ "$TERM_PROGRAM" != "vscode" && -z "$VSCODE_INJECTION" && -z "$NVIM" ]]; then
+  fastfetch --pipe false
+fi
+```
+
+相关链接：
+[fastfetch README](https://github.com/fastfetch-cli/fastfetch?tab=readme-ov-file#q-fastfetch-runs-in-black-and-white-on-shell-startup-why)
+
