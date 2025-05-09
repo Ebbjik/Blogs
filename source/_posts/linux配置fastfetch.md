@@ -7,7 +7,7 @@ categories:
   教程
 ---
 
-这篇文章用于记录如何在ubuntu24.04中安装kitty并将其设置为默认终端
+这篇文章用于记录如何在ubuntu24.04中安装fastfetch并配置样式
 
 <!-- more -->
 
