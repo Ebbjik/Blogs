@@ -5,7 +5,7 @@ tags: [sveltekit, 前端]
 categories: 学习
 ---
 
-这篇文件学习`svelte`中的`Runes`
+这篇文章学习`svelte`中的`Runes`
 
 <!-- more -->
 
