@@ -2,8 +2,7 @@
 title: SvelteKit学习-day1
 date: 2025-03-22 21:51:39
 tags:
-  sveltekit
-  前端
+  [sveltekit,前端]
 categories:
   学习
 ---
