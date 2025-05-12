@@ -138,3 +138,10 @@ about:
     - { class: 'iconfont icon-github-fill', link: 'https://github.com/Ebbjik', tip: 'GitHub' }
     # - { class: 'iconfont icon-douban-fill', link: 'https://douban.com', tip: '豆瓣' }
     # - { class: 'iconfont icon-wechat-fill', qrcode: '/img/favicon.png' }
+
+static_prefix:
+  # 内部静态
+  # Internal static
+  internal_js: /js
+  internal_css: /css
+  internal_img: /img

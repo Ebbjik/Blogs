@@ -9,8 +9,6 @@ categories: 学习
 
 <!-- more -->
 
-  <link rel="stylesheet" href="../css/day2.css">
-
 # 什么是Runes
 
 [官方文档](https://svelte.dev/docs/svelte/what-are-runes)
@@ -105,7 +103,73 @@ todos[0].done = !todos[0].done;
 
 像这样得到的`done`和`text`就只是普通的js变量
 
--- TODO: class部分
+### Classes
+
+`$state`同样可以在类`class`中使用,无论是公有类还是私有类
+
+[关于class](/2025/05/06/linux配置fastfetch/)
+
+```
+class Todo {
+	done = $state(false);
+	text = $state();
+
+	constructor(text) {
+		this.text = text;
+	}
+
+	reset() {
+		this.text = '';
+		this.done = false;
+	}
+}
+```
+
+<div class="alert">
+编译器将 done 和 text 这类用$state创建的响应式变量转换为引用私有字段的类原型上的 get / set 方法。这意味着属性是不可枚举的。
+</div>
+
+当你用 `for...in`、`Object.keys()` 之类的方法去遍历对象属性时，done 和 text 这两个属性不会被枚举
+
+<div class="alert">
+  在 JavaScript 中调用方法时，this 的值很重要
+</div>
+
+## 下面两种调用方法，第一种会报错
+
+```
+<button onclick={todo.reset}>
+	reset
+</button>
+```
+
+```
+<button onclick={() => todo.reset()}>
+	reset
+</button>
+```
+
+或者在类中定义方法时使用箭头函数
+
+```
+class Todo {
+	done = $state(false);
+	text = $state();
+
+	constructor(text) {
+		this.text = text;
+	}
+
+	reset = () => {
+		this.text = '';
+		this.done = false;
+	}
+}
+```
+
+-- TODO: 关于不同函数的blog
+
+为什么报错，见[函数之间的区别](/functions)
 
 <style>
 .side {
@@ -117,5 +181,17 @@ todos[0].done = !todos[0].done;
   padding: 1px 2px;
   border-radius: 4px;
   border: 1px solid #555;
+}
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  background-color: #fffbea; /* very light yellow */
 }
 </style>
