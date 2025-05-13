@@ -107,6 +107,7 @@ todos[0].done = !todos[0].done;
 
 `$state`同样可以在类`class`中使用,无论是公有类还是私有类
 
+--TODO: 写一篇js中类的博客
 [关于class](/2025/05/06/linux配置fastfetch/)
 
 ```
@@ -170,6 +171,50 @@ class Todo {
 -- TODO: 关于不同函数的blog
 
 为什么报错，见[函数之间的区别](/functions)
+
+## $state.raw
+
+如果你不希望对象和数组深度响应式，可以使用`$state.raw`。
+
+使用`$state.raw` 声明的 State 不能被改变;它只能重新分配。换句话说，如果您想更新对象或数组，而不是分配给对象的属性，或使用 push 等数组方法：
+
+```
+let person = $state.raw({
+	name: 'Heraclitus',
+	age: 49
+});
+
+// this will have no effect
+//这不会起作用
+person.age += 1;
+
+// this will work, because we're creating a new person
+//这会起作用，因为创建了一个新对象
+person = {
+	name: 'Heraclitus',
+	age: 50
+};
+```
+
+## $state.snapshot
+
+要拍摄深度反应式`$state`代理的静态快照，请使用`$state.snapshot`
+<span class="side">实际意思就是为了返回静态对象而不是Proxy</span>
+
+```
+<script>
+	let counter = $state({ count: 0 });
+
+	function onclick() {
+		// Will log `{ count: ... }` rather than `Proxy { ... }`
+		console.log($state.snapshot(counter));
+	}
+  let counter = $state({ count: 0 });
+  console.log(counter); // 输出的是 Proxy { ... }
+  console.log($state.snapshot(counter));
+  // 输出的是普通对象：{ count: 0 }
+</script>
+```
 
 <style>
 .side {
