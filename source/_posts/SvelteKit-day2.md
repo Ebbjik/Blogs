@@ -107,8 +107,7 @@ todos[0].done = !todos[0].done;
 
 `$state`同样可以在类`class`中使用,无论是公有类还是私有类
 
---TODO: 写一篇js中类的博客
-[关于class](/2025/05/06/linux配置fastfetch/)
+[关于class](/2025/05/13/js中的类/)
 
 ```
 class Todo {
@@ -215,6 +214,108 @@ person = {
   // 输出的是普通对象：{ count: 0 }
 </script>
 ```
+
+## 把state传递给函数
+
+<div class='alert'>JavaScript 是一种按值传递的语言 — 当你调用一个函数时，参数是值而不是变量 。</div>
+
+```
+function add(a: number, b: number) {
+	return a + b;
+}
+
+let a = 1;
+let b = 2;
+let total = add(a, b);
+console.log(total); // 3
+
+a = 3;
+b = 4;
+console.log(total); // still 3!
+```
+
+实际意思就是，即使传入的变量定义为`$state`，传入函数中的值也是`$state`的当前值
+
+```
+function add(a: number, b: number) {
+	return a + b;
+}
+
+let a = $state(1);
+let b = $state(2);
+let total = add(a, b);
+console.log(total); // 3
+
+a++;
+b++;
+console.log(total); // still 3!
+```
+
+## 跨模块传递
+
+<div class="alert"> 您可以在 .svelte.js 和 .svelte.ts 文件中声明状态，但只有在未直接重新分配该状态的情况下才能导出该状态。</div>
+
+即这样做是错误的
+
+```
+export let count = $state(0);
+
+export function increment() {
+	count += 1;
+}
+```
+
+如果跨模块导出，会导致这样的问题
+
+```
+
+// state.svelte.js
+export let count = $state(0);
+
+// another-file.js
+import { count } from './state.svelte.js';
+console.log(count); // 是一个对象，不是数字
+```
+
+如果你把`count`导出到别的文件中，Svelte编译器无法知道这个`count`是响应式的，所以它不会自动处理`$.get()`和`$.set()`，就会出错或行为不符合预期。
+
+### 避免出错的方法
+
+1. 不要重新赋值整个状态对象
+
+```
+// state.svelte.js
+export const counter = $state({
+	count: 0
+});
+
+export function increment() {
+	counter.count += 1; // ✅ 只修改对象内部属性，不重新赋值
+}
+```
+
+这种方式可以导出响应式对象，只要你不对整个对象重新赋值（即不写`counter = {...}`），Svelte 编译器可以处理。
+
+2. 不导出状态本身，而是导出访问器函数
+
+```
+// state.svelte.js
+let count = $state(0);
+
+export function getCount() {
+	return count;
+}
+
+export function increment() {
+	count += 1;
+}
+```
+
+在这种方式中，`count`是模块内私有的，外部不能直接访问，只能通过函数间接访问和修改。这样 Svelte 编译器仍能正确转换状态操作。
+
+# $derived
+
+--TODO: derived
 
 <style>
 .side {
