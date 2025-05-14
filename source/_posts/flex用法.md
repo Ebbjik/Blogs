@@ -1,0 +1,73 @@
+---
+title: flex用法
+date: 2025-05-14 22:33:24
+tags: [css, 前端]
+categories: 学习
+---
+
+这篇文章学习怎么使用`css`中的`flex`用法
+
+<!-- more -->
+
+[官方文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox)
+
+# 概念
+
+`flex`，全名为Flexible Box模型，通常被称为`flexbox`，是一种一维的布局模型
+我们说 flexbox 是一种一维的布局，是因为一个 flexbox 一次只能处理一个维度上的元素布局，一行或者一列。作为对比的是另外一个二维布局 CSS Grid Layout，可以同时处理行和列上的布局。
+
+--TODO: 写一篇关于grid的blog
+
+# 轴线
+
+`flex`具有两条轴线--主轴和交叉轴
+
+## 主轴
+
+主轴由`flex-direction`定义，可取四个枚举值
+
+- `row`
+- `row-reverse`
+- `column`
+- `column-reverse`
+
+两两分组，当设置为前两个时，主轴将沿着**行向**延伸，这时盒子中的元素就会全部排成一行
+
+```
+
+<div style={{ display: 'flex', gap: '10px' }}>
+  <div style={{ background: 'lightblue', padding: '10px' }}>子项 1</div>
+  <div style={{ background: 'lightgreen', padding: '10px' }}>子项 2</div>
+  <div style={{ background: 'lightcoral', padding: '10px' }}>子项 3</div>
+</div>
+```
+
+<div style="display: flex; gap: 10px;">
+  <div style="background: lightblue; padding: 10px;">子项 1</div>
+  <div style="background: lightgreen; padding: 10px;">子项 2</div>
+  <div style="background: lightcoral; padding: 10px;">子项 3</div>
+</div>
+
+相对的，设置为后两个时，主轴沿着页面的上下方向延伸--也就是**块向**，此时盒子里的每个元素都会独占一行
+
+```
+
+<div style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="background: lightblue; padding: 10px;">子项 1</div>
+  <div style="background: lightgreen; padding: 10px;">子项 2</div>
+  <div style="background: lightcoral; padding: 10px;">子项 3</div>
+</div>
+```
+
+<div style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="background: lightblue; padding: 10px;">子项 1</div>
+  <div style="background: lightgreen; padding: 10px;">子项 2</div>
+  <div style="background: lightcoral; padding: 10px;">子项 3</div>
+</div>
+
+## 交叉轴
+
+交叉轴就是垂直于主轴的一条轴线
+所以如果你的`flex-direction`（主轴）设成了 `row` 或者 `row-reverse` 的话，交叉轴的方向就是沿着上下方向延伸的。
+如果主轴方向设成了 `column` 或者 `column-reverse`，交叉轴就是水平方向。
+--TODO: 待续写
