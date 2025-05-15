@@ -3,6 +3,7 @@ title: flex用法
 date: 2025-05-14 22:33:24
 tags: [css, 前端]
 categories: 学习
+css: flex用法
 ---
 
 这篇文章学习怎么使用`css`中的`flex`用法
@@ -70,4 +71,54 @@ categories: 学习
 交叉轴就是垂直于主轴的一条轴线
 所以如果你的`flex-direction`（主轴）设成了 `row` 或者 `row-reverse` 的话，交叉轴的方向就是沿着上下方向延伸的。
 如果主轴方向设成了 `column` 或者 `column-reverse`，交叉轴就是水平方向。
---TODO: 待续写
+
+# Flex容器
+
+文档中采用了 flexbox 的区域就叫做 flex 容器。为了创建`flex` 容器，我们把一个容器的`display`属性值改为`flex`或者`inline-flex`。完成这一步之后，容器中的直系子元素就会变为**flex** 元素。由于所有 CSS 属性都会有一个初始值，所以 flex 容器中的所有 flex 元素都会有下列行为：
+
+- 元素排列成一行(`flex-direction`初始值为`row`)
+- 元素从主轴的起始线开始
+- 元素不会在主维度方向拉伸，但是可以缩小
+- `flex-basis`属性为`auto`
+- `flex-wrap`属性为`nowrap`
+
+<div class="box">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three <br />has <br />extra <br />text</div>
+</div>
+
+```html
+<div class="box">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three <br />has <br />extra <br />text</div>
+</div>
+```
+
+```css
+.box > * {
+  border: 2px solid rgb(96 139 168);
+  border-radius: 5px;
+  background-color: rgb(96 139 168 / 0.2);
+}
+
+.box {
+  border: 2px dotted rgb(96 139 168);
+  display: flex;
+}
+```
+
+<style>
+
+.box > * {
+  border: 2px solid rgb(96 139 168);
+  border-radius: 5px;
+  background-color: rgb(96 139 168 / 0.2);
+}
+
+.box {
+  border: 2px dotted rgb(96 139 168);
+  display: flex;
+}
+</style>
