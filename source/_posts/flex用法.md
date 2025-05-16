@@ -218,4 +218,41 @@ flex: <flex-grow> <flex-shrink> <flex-basis>;
 }
 ```
 
---TODO: 待续写
+# 简写属性`flex-flow`
+
+[官方文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-flow)
+
+`flex-direction`和`flex-wrap`可以被组合简写为`flex-flow`
+
+像这样
+
+```
+flex-flow: <flex-direction> <flex-wrap>
+```
+
+实例：
+
+<div class="flex-flow-box">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+</div>
+
+```
+
+.flex-flow-box > * {
+  border: 2px solid rgb(96 139 168);
+  border-radius: 5px;
+  background-color: rgb(96 139 168 / 0.2);
+  width: 200px;
+}
+
+.flex-flow-box {
+  width: 500px;
+  border: 2px dotted rgb(96 139 168);
+  display: flex;
+  flex-flow: row wrap;
+}
+```
+
+--TODO: 续写
