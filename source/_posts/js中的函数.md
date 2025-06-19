@@ -75,6 +75,93 @@ console.log(factorial(5)); // 120
 
 ## 箭头函数表达式
 
+写法
+
+```js
+const ceshi = () => {
+  console.log("nihao");
+};
+```
+
+其中括号中的是参数，支持剩余参数、默认参数和解构，始终需要括号
+
+- 剩余参数
+
+```js
+const f = (a, b, ...r) => [a, b, r];
+f(1, 2, 3, 4, 5); // [1, 2, [3, 4, 5]]
+```
+
+其中`a`、`b`是普通参数,`...r`表示接受剩余的所有参数，组成一个数组
+
+- 默认参数
+
+当函数未传入对应参数或是传入`undefined`时，他将会使用默认的值
+
+```js
+function foo(a = 100) {
+  console.log(a);
+}
+
+foo(); // 输出 100
+foo(undefined); // 输出 100
+foo(0); // 输出 0（不会使用默认值）
+```
+
+只有`undefined`可以，其余的假值是不起作用的
+把带默认值的参数放到前面再试图跳过他是不合法的，像是这样
+
+```js
+function f(a = 1, b = 2, c = 3) { ... }
+f(1, , 3); // ❌ 语法错误
+f(1,undefined,3); //必须显式的传递`undefined`
+```
+
+但可以把带默认值的参数放到最后
+
+```js
+function foo(a, b = 20) {
+  console.log(a, b);
+}
+
+foo(10); // ✅ 输出：10 20
+```
+
+- 解构赋值
+
+  1. 数组解构
+
+  - 基本用法
+
+  ```js
+  const arr = [1, 2, 3];
+  const [a, b, c] = arr;
+  console.log(a); // 1
+  console.log(b); // 2
+  console.log(c); // 3
+  ```
+
+  - 跳过元素
+
+  ```js
+  const [x, , z] = [10, 20, 30];
+  console.log(x, z); // 10 30
+  ```
+
+  - 默认值
+
+  ```js
+  const [a = 100, b = 200] = [1];
+  console.log(a, b); // 1 200
+  ```
+
+  - 嵌套解构
+
+  ```js
+  const [a, [b, c]] = [1, [2, 3]];
+  console.log(a, b, c); // 1 2 3
+  ```
+
 ## `Function`构造函数
 
 --TODO: 续写
