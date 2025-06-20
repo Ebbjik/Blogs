@@ -162,6 +162,41 @@ foo(10); // ✅ 输出：10 20
   console.log(a, b, c); // 1 2 3
   ```
 
+箭头函数没有独立的`this`
+
+`this`的值取决于它出现的上下文：函数、类或全局
+
+- 函数上下文
+  在函数内部，this 的值取决于函数如何被调用，`this`的值不是拥有此函数作为自己属性的对象，而是用于调用此函数的对象。
+  ```js
+  const obj4 = {
+    name: "obj4",
+    getThis() {
+      return this;
+    },
+  };
+  const obj5 = { name: "obj5" };
+  obj6.getThis = obj4.getThis;
+  console.log(obj5.getThis()); // { name: 'obj5', getThis: [Function: getThis] }
+  ```
+
+普通函数的`this`是‘调用时决定的’，而箭头函数的`this`是‘定义时决定的’，永远集成自外层作用域，不能改变
+
+```js
+const obj = {
+  name: "Alice",
+  sayHi1: function () {
+    console.log(this.name); // this 指向 obj，输出 "Alice"
+  },
+  sayHi2: () => {
+    console.log(this.name); // this 不是 obj，而是外部（window/undefined）
+  },
+};
+
+obj.sayHi1(); // "Alice"
+obj.sayHi2(); // undefined（不是你期望的）
+```
+
 ## `Function`构造函数
 
 --TODO: 续写
