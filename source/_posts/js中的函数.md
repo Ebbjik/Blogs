@@ -129,7 +129,7 @@ foo(10); // ✅ 输出：10 20
 
 - 解构赋值
 
-  1. 数组解构
+  数组解构
 
   - 基本用法
 
@@ -162,12 +162,13 @@ foo(10); // ✅ 输出：10 20
   console.log(a, b, c); // 1 2 3
   ```
 
-箭头函数没有独立的`this`
+箭头函数没有独立的 `this`、`arguments` 和 `super` 绑定，并且不可被用作方法。
 
 `this`的值取决于它出现的上下文：函数、类或全局
 
 - 函数上下文
   在函数内部，this 的值取决于函数如何被调用，`this`的值不是拥有此函数作为自己属性的对象，而是用于调用此函数的对象。
+
   ```js
   const obj4 = {
     name: "obj4",
@@ -180,23 +181,39 @@ foo(10); // ✅ 输出：10 20
   console.log(obj5.getThis()); // { name: 'obj5', getThis: [Function: getThis] }
   ```
 
-普通函数的`this`是‘调用时决定的’，而箭头函数的`this`是‘定义时决定的’，永远集成自外层作用域，不能改变
+  普通函数的`this`是‘调用时决定的’，而箭头函数的`this`是‘定义时决定的’，永远集成自外层作用域，不能改变
 
-```js
-const obj = {
-  name: "Alice",
-  sayHi1: function () {
-    console.log(this.name); // this 指向 obj，输出 "Alice"
-  },
-  sayHi2: () => {
-    console.log(this.name); // this 不是 obj，而是外部（window/undefined）
-  },
-};
+  ```js
+  const obj = {
+    name: "Alice",
+    sayHi1: function () {
+      console.log(this.name); // this 指向 obj，输出 "Alice"
+    },
+    sayHi2: () => {
+      console.log(this.name); // this 不是 obj，而是外部（window/undefined）
+    },
+  };
+  obj.sayHi1(); // "Alice"
+  obj.sayHi2(); // undefined（不是你期望的）
+  ```
 
-obj.sayHi1(); // "Alice"
-obj.sayHi2(); // undefined（不是你期望的）
-```
+  上面的`obj`只是一个变量对象，箭头函数从他那里得不到`this`，只能再往上，也就是全局
+
+`arguments`同样从上层继承~~事实上只有函数~~，`arguments`是一个对应于传递给函数的参数的类数组对象。
+在[官方文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments)中，推荐编写兼容ES6的代码时使用**剩余参数**
+
+`super`从它被定义的上下文获取~~包含它的类~~
+
+这三个东西，都要从外层作用域继承，是因为ES6设计箭头函数时，目的就是**简洁、闭包友好、绑定外层this**，因此：
+
+- 它**不创建自己的执行上下文**
+- 它**直接使用它定义时的“父作用域”的上下文**。
+- 所以，它也就没有自己的 `this`、`arguments`、`super`、`new.target`。
 
 ## `Function`构造函数
 
 --TODO: 续写
+
+```
+
+```
